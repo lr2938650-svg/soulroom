@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delight Coffee Cafe</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: url("https://images.unsplash.com/photo-1509042239860-f550ce710b93")
+          center/cover no-repeat fixed;
+        color: #fff;
+      }
+
+      header {
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 40px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: rgba(0, 0, 0, 0.55);
+        padding: 20px;
+        border-radius: 20px;
+        backdrop-filter: blur(6px);
+      }
+
+      h2 {
+        margin-top: 25px;
+        font-size: 26px;
+        cursor: pointer;
+        padding: 8px 0;
+        border-bottom: 2px solid #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        display: none;
+      }
+
+      li {
+        background: rgba(255, 255, 255, 0.1);
+        margin: 8px 0;
+        padding: 12px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .rating-box {
+        margin-top: 40px;
+        text-align: center;
+      }
+
+      .stars span {
+        cursor: pointer;
+        font-size: 35px;
+        margin: 5px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 25px;
+        font-size: 20px;
+        font-weight: 600;
+        background: rgba(0, 0, 0, 0.5);
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>✨ Delight Coffee Cafe ✨</header>
+
+    <div class="container">
+      <!-- Coffee -->
+      <h2 onclick="toggleMenu('coffee')">☕ Coffee <span>+</span></h2>
+      <ul id="coffee">
+        <li>Classic Cold Coffee <span>₹70</span></li>
+        <li>DCC Special Cold Coffee <span>₹179</span></li>
+        <li>Hot Coffee <span>₹45</span></li>
+        <li>Hot Coffee With Chocolate <span>₹60</span></li>
+        <li>Cold Coffee With Ice Cream <span>₹89</span></li>
+      </ul>
+
+      <!-- Pizza -->
+      <h2 onclick="toggleMenu('pizza')">🍕 Pizza <span>+</span></h2>
+      <ul id="pizza">
+        <li>Paneer Pizza <span>₹219</span></li>
+        <li>OTC Pizza <span>₹199</span></li>
+        <li>Corn Pizza <span>₹179</span></li>
+        <li>Margherita Pizza <span>₹179</span></li>
+        <li>Onion Pizza <span>₹179</span></li>
+        <li>Capsicum Pizza <span>₹179</span></li>
+        <li>Garden Fresh Pizza <span>₹239</span></li>
+        <li>DCC Special Pizza <span>₹279</span></li>
+      </ul>
+
+      <!-- Brownie -->
+      <h2 onclick="toggleMenu('brownie')">🍫 Brownie <span>+</span></h2>
+      <ul id="brownie">
+        <li>Choco Lava Cake <span>₹99</span></li>
+        <li>Brownie With Ice Cream <span>₹149</span></li>
+        <li>Classic Brownie <span>₹99</span></li>
+      </ul>
+
+      <!-- Fries -->
+      <h2 onclick="toggleMenu('fries')">🍟 Fries <span>+</span></h2>
+      <ul id="fries">
+        <li>Peri Peri Fries <span>₹119</span></li>
+        <li>French Fries <span>₹99</span></li>
+      </ul>
+
+      <!-- Roll -->
+      <h2 onclick="toggleMenu('roll')">🌯 Roll <span>+</span></h2>
+      <ul id="roll">
+        <li>Spring Roll (6 pcs) <span>₹149</span></li>
+        <li>Cheese Roll (6 pcs) <span>₹169</span></li>
+      </ul>
+
+      <!-- Pasta -->
+      <h2 onclick="toggleMenu('pasta')">🍝 Pasta <span>+</span></h2>
+      <ul id="pasta">
+        <li>White Sauce Pasta <span>₹199</span></li>
+        <li>Red Sauce Pasta <span>₹169</span></li>
+        <li>Pink Sauce Pasta <span>₹229</span></li>
+      </ul>
+
+      <!-- Vada Pav -->
+      <h2 onclick="toggleMenu('vada')">🍔 Vada Pav <span>+</span></h2>
+      <ul id="vada">
+        <li>Vada Pav <span>₹59</span></li>
+        <li>DCC Special Vada Pav <span>₹99</span></li>
+      </ul>
+
+      <!-- Crunchies -->
+      <h2 onclick="toggleMenu('crunch')">🧀 Crunchies <span>+</span></h2>
+      <ul id="crunch">
+        <li>Potato Nuggets (8 pcs) <span>₹129</span></li>
+        <li>Cheese Corn Toast <span>₹149</span></li>
+      </ul>
+
+      <!-- Chinese -->
+      <h2 onclick="toggleMenu('chinese')">🍜 Chinese <span>+</span></h2>
+      <ul id="chinese">
+        <li>Hakka Noodles <span>₹139</span></li>
+        <li>Veg Chowmein <span>₹129</span></li>
+        <li>Chilli Garlic Noodles <span>₹149</span></li>
+        <li>Schezwan Noodles <span>₹159</span></li>
+        <li>Deep Fry (6 pcs) <span>₹119</span></li>
+      </ul>
+
+      <!-- Pav Bhaji -->
+      <h2 onclick="toggleMenu('bhaji')">🍛 Pav Bhaji <span>+</span></h2>
+      <ul id="bhaji">
+        <li>Pav Bhaji <span>₹149</span></li>
+      </ul>
+
+      <!-- Sandwich -->
+      <h2 onclick="toggleMenu('sandwich')">🥪 Sandwich <span>+</span></h2>
+      <ul id="sandwich">
+        <li>Veg Sandwich Grilled <span>₹119</span></li>
+        <li>Bombay Sandwich <span>₹99</span></li>
+        <li>Paneer Sandwich Grilled <span>₹159</span></li>
+        <li>DCC Special Sandwich Grilled <span>₹179</span></li>
+      </ul>
+
+      <!-- Burger -->
+      <h2 onclick="toggleMenu('burger')">🍔 Burger <span>+</span></h2>
+      <ul id="burger">
+        <li>Cheese Burger <span>₹149</span></li>
+        <li>Aloo Tikki Burger <span>₹99</span></li>
+        <li>Veg Tikki Burger <span>₹109</span></li>
+        <li>Aloo Tikki Burger (Double) <span>₹129</span></li>
+        <li>DCC Special Burger <span>₹169</span></li>
+      </ul>
+
+      <!-- Garlic Bread -->
+      <h2 onclick="toggleMenu('garlic')">🧄 Garlic Bread <span>+</span></h2>
+      <ul id="garlic">
+        <li>Stuffed Garlic Bread <span>₹199</span></li>
+        <li>OTC Garlic Bread <span>₹199</span></li>
+      </ul>
+
+      <!-- Maggi -->
+      <h2 onclick="toggleMenu('maggi')">🍜 Maggi <span>+</span></h2>
+      <ul id="maggi">
+        <li>Veg Maggi <span>₹99</span></li>
+        <li>Plain Maggi <span>₹79</span></li>
+        <li>Cheese Maggi <span>₹129</span></li>
+        <li>Peri Peri Maggi <span>₹139</span></li>
+        <li>Paneer Veg Maggi <span>₹149</span></li>
+      </ul>
+
+      <!-- Tea -->
+      <h2 onclick="toggleMenu('tea')">🍵 Tea <span>+</span></h2>
+      <ul id="tea">
+        <li>Masala Tea <span>₹29</span></li>
+        <li>Ginger Tea <span>₹29</span></li>
+        <li>DCC Special Tea <span>₹39</span></li>
+      </ul>
+
+      <!-- Iced Tea -->
+      <h2 onclick="toggleMenu('iced')">🧊 Iced Tea <span>+</span></h2>
+      <ul id="iced">
+        <li>Lemon Iced Tea <span>₹99</span></li>
+        <li>Strawberry Iced Tea <span>₹99</span></li>
+        <li>Watermelon Iced Tea <span>₹99</span></li>
+      </ul>
+
+      <!-- Rating Section -->
+      <div class="rating-box">
+        <h2>⭐ Rate Your Experience</h2>
+        <div class="stars">
+          <span onclick="rate(1)">★</span>
+          <span onclick="rate(2)">★</span>
+          <span onclick="rate(3)">★</span>
+          <span onclick="rate(4)">★</span>
+          <span onclick="rate(5)">★</span>
+        </div>
+        <p id="rate-msg" style="font-size: 20px; margin-top: 10px"></p>
+      </div>
+    </div>
+
+    <footer>
+      😊 Thank You For Visiting — Come Again! Your Smile Makes Our Café Special
+      ❤️
+    </footer>
+
+    <script>
+      function toggleMenu(id) {
+        const menu = document.getElementById(id);
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+      }
+
+      function rate(stars) {
+        const msg = document.getElementById("rate-msg");
+
+        if (stars == 5) msg.innerHTML = "😍 Thank you! You made our day!";
+        else if (stars == 4) msg.innerHTML = "😊 Glad you liked it!";
+        else if (stars == 3) msg.innerHTML = "🙂 We will improve more!";
+        else if (stars == 2) msg.innerHTML = "😕 Sorry! We'll do better!";
+        else msg.innerHTML = "😭 Sorry to disappoint you!";
+
+        msg.style.color = "yellow";
+      }
+    </script>
+  </body>
+</html>
