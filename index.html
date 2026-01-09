@@ -1,260 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Delight Coffee Cafe</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: "Poppins", sans-serif;
-        background: url("https://images.unsplash.com/photo-1509042239860-f550ce710b93")
-          center/cover no-repeat fixed;
-        color: #fff;
-      }
+<head>
+<meta charset="UTF-8">
+<title>SoulRoom 🔐</title>
 
-      header {
-        text-align: center;
-        padding: 40px 20px;
-        font-size: 40px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.7);
-        background: rgba(0, 0, 0, 0.4);
-      }
+<meta name="viewport"
+content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 
-      .container {
-        max-width: 900px;
-        margin: auto;
-        background: rgba(0, 0, 0, 0.55);
-        padding: 20px;
-        border-radius: 20px;
-        backdrop-filter: blur(6px);
-      }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-      h2 {
-        margin-top: 25px;
-        font-size: 26px;
-        cursor: pointer;
-        padding: 8px 0;
-        border-bottom: 2px solid #fff;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+<style>
+:root{
+  --pink:#ff5c8a;
+  --bg:#fff0f5;
+  --card:#fff;
+  --you:#f1f1f1;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  height:100%;
+  font-family:Poppins;
+  background:var(--bg);
+}
 
-      ul {
-        list-style: none;
-        padding: 0;
-        display: none;
-      }
+/* LOGIN */
+#login{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+}
+.card{
+  width:100%;
+  max-width:420px;
+  background:var(--card);
+  padding:24px;
+  border-radius:22px;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+input,button{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  margin-top:12px;
+  font-size:15px;
+}
+button{
+  background:var(--pink);
+  color:#fff;
+  font-weight:600;
+}
 
-      li {
-        background: rgba(255, 255, 255, 0.1);
-        margin: 8px 0;
-        padding: 12px;
-        border-radius: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+/* PIN ROW */
+.pinRow{
+  display:flex;
+  gap:6px;
+}
+.pinRow button{
+  width:54px;
+}
 
-      .rating-box {
-        margin-top: 40px;
-        text-align: center;
-      }
+/* CHAT */
+#chat{
+  display:none;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+.header{
+  background:var(--pink);
+  color:#fff;
+  padding:14px;
+  text-align:center;
+  font-weight:600;
+}
+#typing{font-size:12px;opacity:.8}
 
-      .stars span {
-        cursor: pointer;
-        font-size: 35px;
-        margin: 5px;
-      }
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding:12px;
+  padding-bottom:90px;
+}
+.msg{
+  max-width:78%;
+  padding:12px 14px;
+  margin:6px 0;
+  border-radius:18px;
+  word-wrap:break-word;
+  font-size:14px;
+}
+.me{
+  background:var(--pink);
+  color:#fff;
+  margin-left:auto;
+}
+.you{
+  background:var(--you);
+}
+.msg img{
+  width:100%;
+  border-radius:14px;
+  margin-top:6px;
+}
 
-      footer {
-        text-align: center;
-        padding: 25px;
-        font-size: 20px;
-        font-weight: 600;
-        background: rgba(0, 0, 0, 0.5);
-        margin-top: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <header>✨ Delight Coffee Cafe ✨</header>
+/* INPUT */
+.inputBar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#fff;
+  padding:10px;
+  display:flex;
+  gap:8px;
+  box-shadow:0 -5px 15px rgba(0,0,0,.1);
+}
+.inputBar input[type=text]{
+  flex:1;
+  padding:12px;
+  border-radius:20px;
+  border:1px solid #ddd;
+}
+.iconBtn{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:var(--pink);
+  color:#fff;
+  border:none;
+  font-size:20px;
+}
 
-    <div class="container">
-      <!-- Coffee -->
-      <h2 onclick="toggleMenu('coffee')">☕ Coffee <span>+</span></h2>
-      <ul id="coffee">
-        <li>Classic Cold Coffee <span>₹70</span></li>
-        <li>DCC Special Cold Coffee <span>₹179</span></li>
-        <li>Hot Coffee <span>₹45</span></li>
-        <li>Hot Coffee With Chocolate <span>₹60</span></li>
-        <li>Cold Coffee With Ice Cream <span>₹89</span></li>
-      </ul>
+/* SCREENSHOT BLUR */
+.blur{
+  filter:blur(12px);
+}
+</style>
+</head>
 
-      <!-- Pizza -->
-      <h2 onclick="toggleMenu('pizza')">🍕 Pizza <span>+</span></h2>
-      <ul id="pizza">
-        <li>Paneer Pizza <span>₹219</span></li>
-        <li>OTC Pizza <span>₹199</span></li>
-        <li>Corn Pizza <span>₹179</span></li>
-        <li>Margherita Pizza <span>₹179</span></li>
-        <li>Onion Pizza <span>₹179</span></li>
-        <li>Capsicum Pizza <span>₹179</span></li>
-        <li>Garden Fresh Pizza <span>₹239</span></li>
-        <li>DCC Special Pizza <span>₹279</span></li>
-      </ul>
+<body>
 
-      <!-- Brownie -->
-      <h2 onclick="toggleMenu('brownie')">🍫 Brownie <span>+</span></h2>
-      <ul id="brownie">
-        <li>Choco Lava Cake <span>₹99</span></li>
-        <li>Brownie With Ice Cream <span>₹149</span></li>
-        <li>Classic Brownie <span>₹99</span></li>
-      </ul>
+<!-- LOGIN -->
+<div id="login">
+  <div class="card">
+    <h2 style="text-align:center">SoulRoom 🔐</h2>
+    <input id="name" placeholder="Your Name">
 
-      <!-- Fries -->
-      <h2 onclick="toggleMenu('fries')">🍟 Fries <span>+</span></h2>
-      <ul id="fries">
-        <li>Peri Peri Fries <span>₹119</span></li>
-        <li>French Fries <span>₹99</span></li>
-      </ul>
-
-      <!-- Roll -->
-      <h2 onclick="toggleMenu('roll')">🌯 Roll <span>+</span></h2>
-      <ul id="roll">
-        <li>Spring Roll (6 pcs) <span>₹149</span></li>
-        <li>Cheese Roll (6 pcs) <span>₹169</span></li>
-      </ul>
-
-      <!-- Pasta -->
-      <h2 onclick="toggleMenu('pasta')">🍝 Pasta <span>+</span></h2>
-      <ul id="pasta">
-        <li>White Sauce Pasta <span>₹199</span></li>
-        <li>Red Sauce Pasta <span>₹169</span></li>
-        <li>Pink Sauce Pasta <span>₹229</span></li>
-      </ul>
-
-      <!-- Vada Pav -->
-      <h2 onclick="toggleMenu('vada')">🍔 Vada Pav <span>+</span></h2>
-      <ul id="vada">
-        <li>Vada Pav <span>₹59</span></li>
-        <li>DCC Special Vada Pav <span>₹99</span></li>
-      </ul>
-
-      <!-- Crunchies -->
-      <h2 onclick="toggleMenu('crunch')">🧀 Crunchies <span>+</span></h2>
-      <ul id="crunch">
-        <li>Potato Nuggets (8 pcs) <span>₹129</span></li>
-        <li>Cheese Corn Toast <span>₹149</span></li>
-      </ul>
-
-      <!-- Chinese -->
-      <h2 onclick="toggleMenu('chinese')">🍜 Chinese <span>+</span></h2>
-      <ul id="chinese">
-        <li>Hakka Noodles <span>₹139</span></li>
-        <li>Veg Chowmein <span>₹129</span></li>
-        <li>Chilli Garlic Noodles <span>₹149</span></li>
-        <li>Schezwan Noodles <span>₹159</span></li>
-        <li>Deep Fry (6 pcs) <span>₹119</span></li>
-      </ul>
-
-      <!-- Pav Bhaji -->
-      <h2 onclick="toggleMenu('bhaji')">🍛 Pav Bhaji <span>+</span></h2>
-      <ul id="bhaji">
-        <li>Pav Bhaji <span>₹149</span></li>
-      </ul>
-
-      <!-- Sandwich -->
-      <h2 onclick="toggleMenu('sandwich')">🥪 Sandwich <span>+</span></h2>
-      <ul id="sandwich">
-        <li>Veg Sandwich Grilled <span>₹119</span></li>
-        <li>Bombay Sandwich <span>₹99</span></li>
-        <li>Paneer Sandwich Grilled <span>₹159</span></li>
-        <li>DCC Special Sandwich Grilled <span>₹179</span></li>
-      </ul>
-
-      <!-- Burger -->
-      <h2 onclick="toggleMenu('burger')">🍔 Burger <span>+</span></h2>
-      <ul id="burger">
-        <li>Cheese Burger <span>₹149</span></li>
-        <li>Aloo Tikki Burger <span>₹99</span></li>
-        <li>Veg Tikki Burger <span>₹109</span></li>
-        <li>Aloo Tikki Burger (Double) <span>₹129</span></li>
-        <li>DCC Special Burger <span>₹169</span></li>
-      </ul>
-
-      <!-- Garlic Bread -->
-      <h2 onclick="toggleMenu('garlic')">🧄 Garlic Bread <span>+</span></h2>
-      <ul id="garlic">
-        <li>Stuffed Garlic Bread <span>₹199</span></li>
-        <li>OTC Garlic Bread <span>₹199</span></li>
-      </ul>
-
-      <!-- Maggi -->
-      <h2 onclick="toggleMenu('maggi')">🍜 Maggi <span>+</span></h2>
-      <ul id="maggi">
-        <li>Veg Maggi <span>₹99</span></li>
-        <li>Plain Maggi <span>₹79</span></li>
-        <li>Cheese Maggi <span>₹129</span></li>
-        <li>Peri Peri Maggi <span>₹139</span></li>
-        <li>Paneer Veg Maggi <span>₹149</span></li>
-      </ul>
-
-      <!-- Tea -->
-      <h2 onclick="toggleMenu('tea')">🍵 Tea <span>+</span></h2>
-      <ul id="tea">
-        <li>Masala Tea <span>₹29</span></li>
-        <li>Ginger Tea <span>₹29</span></li>
-        <li>DCC Special Tea <span>₹39</span></li>
-      </ul>
-
-      <!-- Iced Tea -->
-      <h2 onclick="toggleMenu('iced')">🧊 Iced Tea <span>+</span></h2>
-      <ul id="iced">
-        <li>Lemon Iced Tea <span>₹99</span></li>
-        <li>Strawberry Iced Tea <span>₹99</span></li>
-        <li>Watermelon Iced Tea <span>₹99</span></li>
-      </ul>
-
-      <!-- Rating Section -->
-      <div class="rating-box">
-        <h2>⭐ Rate Your Experience</h2>
-        <div class="stars">
-          <span onclick="rate(1)">★</span>
-          <span onclick="rate(2)">★</span>
-          <span onclick="rate(3)">★</span>
-          <span onclick="rate(4)">★</span>
-          <span onclick="rate(5)">★</span>
-        </div>
-        <p id="rate-msg" style="font-size: 20px; margin-top: 10px"></p>
-      </div>
+    <div class="pinRow">
+      <input id="pin" type="password" placeholder="Secret PIN">
+      <button onclick="togglePin()">👁️</button>
     </div>
 
-    <footer>
-      😊 Thank You For Visiting — Come Again! Your Smile Makes Our Café Special
-      ❤️
-    </footer>
+    <button onclick="join()">Enter Private Room</button>
+  </div>
+</div>
 
-    <script>
-      function toggleMenu(id) {
-        const menu = document.getElementById(id);
-        menu.style.display = menu.style.display === "block" ? "none" : "block";
-      }
+<!-- CHAT -->
+<div id="chat">
+  <div class="header">
+    OnlyUs 💖
+    <div id="typing"></div>
+  </div>
 
-      function rate(stars) {
-        const msg = document.getElementById("rate-msg");
+  <div class="messages" id="messages"></div>
 
-        if (stars == 5) msg.innerHTML = "😍 Thank you! You made our day!";
-        else if (stars == 4) msg.innerHTML = "😊 Glad you liked it!";
-        else if (stars == 3) msg.innerHTML = "🙂 We will improve more!";
-        else if (stars == 2) msg.innerHTML = "😕 Sorry! We'll do better!";
-        else msg.innerHTML = "😭 Sorry to disappoint you!";
+  <div class="inputBar">
+    <button class="iconBtn" onclick="img.click()">📷</button>
+    <input type="text" id="msg" placeholder="Type message…" oninput="typing(true)">
+    <button class="iconBtn" onclick="send()">➤</button>
+    <input type="file" id="img" accept="image/*" hidden>
+  </div>
+</div>
 
-        msg.style.color = "yellow";
-      }
-    </script>
-  </body>
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+firebase.initializeApp({
+  apiKey:"AIzaSyAdpLNU2c-C5KxJv2weJECSpoghz_NGNtM",
+  authDomain:"soulroom-4e31d.firebaseapp.com",
+  databaseURL:"https://soulroom-4e31d-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:"soulroom-4e31d",
+  messagingSenderId:"139421380646",
+  appId:"1:139421380646:web:8dc4a4e166291102d2f6e7"
+});
+
+const db=firebase.database();
+
+/* ELEMENTS */
+const login=document.getElementById("login");
+const chat=document.getElementById("chat");
+const nameInput=document.getElementById("name");
+const pinInput=document.getElementById("pin");
+const msg=document.getElementById("msg");
+const img=document.getElementById("img");
+const messages=document.getElementById("messages");
+const typingDiv=document.getElementById("typing");
+
+const room="onlyus";
+
+/* ENCRYPTION */
+const getKey=p=>CryptoJS.SHA256(p).toString();
+let user,key;
+
+/* UI */
+function togglePin(){
+  pinInput.type = pinInput.type==="password"?"text":"password";
+}
+
+/* JOIN */
+async function join(){
+  user=nameInput.value.trim();
+  const pin=pinInput.value.trim();
+  if(!user||!pin) return alert("Fill all fields");
+
+  key=getKey(pin);
+  const ref=db.ref("rooms/"+room);
+  const snap=await ref.once("value");
+
+  if(!snap.exists()) await ref.set({key});
+  else if(snap.val().key!==key) return alert("Wrong PIN");
+
+  login.style.display="none";
+  chat.style.display="flex";
+  listen();
+}
+
+/* SEND */
+function send(){
+  if(!msg.value && !img.files[0]) return;
+  const ref=db.ref(`rooms/${room}/msgs`).push();
+  const data={u:enc(user),time:Date.now()};
+  if(msg.value) data.t=enc(msg.value);
+
+  if(img.files[0]){
+    const r=new FileReader();
+    r.onload=e=>{data.i=enc(e.target.result);ref.set(data);}
+    r.readAsDataURL(img.files[0]);
+  }else ref.set(data);
+
+  msg.value="";
+  img.value="";
+  typing(false);
+}
+
+/* LISTEN */
+function listen(){
+  db.ref(`rooms/${room}/msgs`).on("child_added",s=>{
+    const m=s.val();
+    const sender=dec(m.u);
+    const d=document.createElement("div");
+    d.className="msg "+(sender===user?"me":"you");
+    if(m.t) d.innerHTML+=dec(m.t);
+    if(m.i){const im=new Image();im.src=dec(m.i);d.appendChild(im);}
+    messages.appendChild(d);
+    messages.scrollTop=messages.scrollHeight;
+  });
+}
+
+/* TYPING */
+function typing(v){
+  const r=db.ref(`typing/${room}/${user}`);
+  v?r.set(true):r.remove();
+  r.onDisconnect().remove();
+}
+db.ref(`typing/${room}`).on("value",s=>{
+  if(!typingDiv) return;
+  const o=s.val()||{};
+  typingDiv.innerText=
+    Object.keys(o).filter(u=>u!==user).length?"Typing…":"";
+});
+
+/* ENCRYPT HELPERS */
+const enc=t=>CryptoJS.AES.encrypt(t,key).toString();
+const dec=t=>CryptoJS.AES.decrypt(t,key).toString(CryptoJS.enc.Utf8);
+
+/* SCREENSHOT / RECORD DETECT */
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden){
+    chat.classList.add("blur");
+    db.ref(`rooms/${room}/msgs`).push({
+      u:enc("System"),
+      t:enc("⚠️ Screenshot / Screen activity detected"),
+      time:Date.now()
+    });
+  }else chat.classList.remove("blur");
+});
+</script>
+</body>
 </html>
